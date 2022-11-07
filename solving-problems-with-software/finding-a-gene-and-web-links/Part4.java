@@ -16,16 +16,18 @@ public class Part4 {
         
         for(String line : webpage.lines()) {
             String lowerCasedLine = line.toLowerCase();
+            int strPos = lowerCasedLine.indexOf("youtube.com");
             
-            if(line.contains("youtube.com")) {
-                int startPos = line.indexOf("href=") + ("href=").length();
-                int endPos = line.indexOf("\"", startPos + 1) + 1;
-                String youtubeLink = line.substring(startPos, endPos);
+            if(lowerCasedLine.contains("youtube.com")) {
+                int startPos = lowerCasedLine.lastIndexOf("\"", strPos);
+                int endPos = lowerCasedLine.indexOf("\"", strPos + 1);
+                String youtubeLink = line.substring(startPos + 1, endPos);
                 System.out.println(youtubeLink);
             }
             
         }
         
     }
+    
     
 }

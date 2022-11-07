@@ -32,6 +32,8 @@ public class Part1 {
         System.out.println("Test 3: " + findSimpleGene("ACCTAGTACCCTCATA")); // no atg and taa
         System.out.println("Test 4: " + findSimpleGene("CCATGACATGCTAGTACCCCTAA")); // correct
         System.out.println("Test 5: " + findSimpleGene("ACATGATGCTAGTACTAACC")); // w atg and taa
+        
+        System.out.println("Answer: " + findSimpleGene("AAATGCCCTAACTAGATTAAGAAACC"));
     }
     
 }
