@@ -7,7 +7,7 @@
  */
 public class Part1 {
     
-    public static String findSimpleGene(String dna) {
+    public String findSimpleGene(String dna) {
         int startCodonPos = dna.indexOf("ATG");
         if(startCodonPos == - 1) {
             return "";
@@ -26,7 +26,7 @@ public class Part1 {
         return gene;
     }
     
-    public static void testSimpleGene() {
+    public void testSimpleGene() {
         System.out.println("Test 1: " + findSimpleGene("CTAGTACCCTAA")); // no atg
         System.out.println("Test 2: " + findSimpleGene("ACATGCTAGTACCC")); // no taa
         System.out.println("Test 3: " + findSimpleGene("ACCTAGTACCCTCATA")); // no atg and taa

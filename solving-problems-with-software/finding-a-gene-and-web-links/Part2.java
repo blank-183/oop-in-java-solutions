@@ -7,7 +7,7 @@
  */
 public class Part2 {
 
-    public static String findSimpleGene(String dna, String startCodon, String stopCodon) {
+    public String findSimpleGene(String dna, String startCodon, String stopCodon) {
         if(dna.equals(dna.toUpperCase())) {
             startCodon = startCodon.toUpperCase();
             stopCodon = stopCodon.toUpperCase();
@@ -35,7 +35,7 @@ public class Part2 {
         return gene;
     }
     
-    public static void testSimpleGene() {
+    public void testSimpleGene() {
         System.out.println("Test 1: " + findSimpleGene("CTAGTACCCTAA", "atg", "TAA")); // no atg
         System.out.println("Test 2: " + findSimpleGene("ACATGCTAGTACCC", "ATG", "taa")); // no taa
         System.out.println("Test 3: " + findSimpleGene("ACCTAGTACCCTCATA", "ATG", "TAA")); // no atg and taa

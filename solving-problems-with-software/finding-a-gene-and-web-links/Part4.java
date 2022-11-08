@@ -11,7 +11,7 @@ import java.util.*;
 
 public class Part4 {
     
-    public static void getURLS() {
+    public void getURLS() {
         URLResource webpage = new URLResource("https://www.dukelearntoprogram.com//course2/data/manylinks.html");
         
         for(String line : webpage.lines()) {

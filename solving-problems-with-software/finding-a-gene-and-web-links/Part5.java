@@ -10,7 +10,7 @@ import edu.duke.*;
 
 public class Part5 {
     
-    public static void getURLS() {
+    public void getURLS() {
        URLResource file = new URLResource("https://www.dukelearntoprogram.com//course2/data/manylinks.html");
        for (String item : file.words()) {
        	   String itemLower = item.toLowerCase();

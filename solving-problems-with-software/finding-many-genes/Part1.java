@@ -4,7 +4,7 @@
  */
 public class Part1 {
 
-    public static int findStopCodon(String dna, int startIndex, String stopCodon) {
+    public int findStopCodon(String dna, int startIndex, String stopCodon) {
         int stopIndex = dna.indexOf(stopCodon, startIndex + 3);
         
         if(stopIndex == -1 || ((stopIndex - startIndex) % 3 != 0)) {
@@ -13,7 +13,7 @@ public class Part1 {
         return stopIndex;
     }
     
-    public static String findGene(String dna) {
+    public String findGene(String dna) {
         int startIndex = dna.indexOf("ATG");
         
         if(startIndex == -1) {
@@ -33,7 +33,7 @@ public class Part1 {
         return dna.substring(startIndex, minIndex + 3);
     }
     
-    public static void printAllGenes(String dna) {
+    public void printAllGenes(String dna) {
         int currIndex = dna.indexOf("ATG");
         
         if(currIndex == -1) {
@@ -55,12 +55,12 @@ public class Part1 {
         }
     }
     
-    public static void testFindStopCodon() {
+    public void testFindStopCodon() {
         System.out.println(findStopCodon("aaaATGbbbTAA", 3, "TAA"));
         System.out.println(findStopCodon("aaaATGbbTAAATTGA", 3, "TGA"));
     }
     
-    public static void testFindGene() {
+    public void testFindGene() {
         // System.out.println(findGene("xxxTGATAA"));
         // System.out.println(findGene("aaATGxxxTGA"));
         // System.out.println(findGene("aaATGxxxaaTGAATAG"));

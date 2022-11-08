@@ -7,7 +7,7 @@
  */
 public class Part3 {
 
-    public static boolean twoOccurences(String stringA, String stringB) {
+    public boolean twoOccurences(String stringA, String stringB) {
         int index = 0;
         int strPos = stringB.indexOf(stringA);
         
@@ -37,7 +37,7 @@ public class Part3 {
         return true;
     }
     
-    public static String lastPart(String stringA , String stringB) {
+    public String lastPart(String stringA , String stringB) {
         int strPos = stringB.indexOf(stringA);
         
         if(strPos == -1) {
@@ -47,7 +47,7 @@ public class Part3 {
         return stringB.substring(strPos + stringA.length());
     }
     
-    public static void testing() {
+    public void testing() {
         System.out.println(twoOccurences("i", "ivee"));
         System.out.println(twoOccurences("e", "ivee"));
         System.out.println(twoOccurences("by", "A story by Abby Long"));
