@@ -18,7 +18,7 @@ public class Part5 {
        	   if (pos != -1) {
        	       int beg = itemLower.indexOf("\"",pos-9);
        	       int end = itemLower.indexOf("\"", pos+1);
-       	       System.out.println(itemLower.substring(beg+1,end));;
+       	       System.out.println(itemLower.substring(beg+1,end));
            }
    	}
     }
