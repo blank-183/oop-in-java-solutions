@@ -1,9 +1,3 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all he/she needs to know. The comments should usually include at least:
-------------------------------------------------------------------------
-
 ### Part 1: Finding many Genes 
 This assignment is to write the code from the lesson to make the following improvements to your algorithm:
 
