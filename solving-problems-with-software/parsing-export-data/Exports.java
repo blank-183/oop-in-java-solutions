@@ -57,10 +57,10 @@ public class Exports {
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
         
-        // System.out.println(countryInfo(parser, "Peru"));
-        // listExportersTwoProducts(parser, "gold", "diamonds");
-        // System.out.println(numberOfExporters(parser, "gold"));
-        bigExporters(parser, "$400,000,000");
+        //System.out.println(countryInfo(parser, "Nauru"));
+        listExportersTwoProducts(parser, "fish", "nuts");
+        //System.out.println(numberOfExporters(parser, "gold"));
+        //bigExporters(parser, "$999,999,999,999");
     }
     
 }
