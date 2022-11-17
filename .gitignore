@@ -3,6 +3,7 @@
 
 # Log file
 *.log
+nc_weather
 
 # BlueJ files
 *.ctxt
