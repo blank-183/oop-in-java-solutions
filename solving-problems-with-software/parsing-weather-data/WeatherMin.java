@@ -93,6 +93,60 @@ public class WeatherMin {
         return lowestHumRow;
     }
     
+    public double averageTemperatureInFile(CSVParser parser) {
+        double totalSum = 0.0;
+        int rowCount = 0;
+        
+        for(CSVRecord currentRow : parser) {
+            totalSum += Double.parseDouble(currentRow.get("TemperatureF"));
+            rowCount += 1;
+        }
+        
+        double average = totalSum / rowCount;
+        
+        return average;
+    }
+    
+    public double averageTemperatureWithHumidityInFile(CSVParser parser, int humidity) {
+        double totalSum = 0.0;
+        int rowCount = 0;
+        
+        for(CSVRecord currentRow : parser) {
+            if(Integer.parseInt(currentRow.get("Humidity")) >= humidity) {
+                totalSum += Double.parseDouble(currentRow.get("TemperatureF"));
+                rowCount += 1;
+            }
+        }
+        
+        if(rowCount == 0) {
+            return 0.0;
+        }
+        
+        double average = totalSum / rowCount;
+        
+        return average;
+    }
+    
+    public void testAverageTemperatureWithHumidityInFile() {
+        FileResource fr = new FileResource();
+        CSVParser parser = fr.getCSVParser();
+        double averageTemp = averageTemperatureWithHumidityInFile(parser, 80);
+        
+        if (averageTemp > 0) {   
+            System.out.println("Average Temp when high Humidity is " + averageTemp);
+        } else {
+            System.out.println("No temperatures with that humidity");
+        }
+    }
+    
+    public void testAverageTemperatureInFile() {
+        FileResource fr = new FileResource();
+        CSVParser parser = fr.getCSVParser();
+        double averageTemp = averageTemperatureInFile(parser);
+        
+        System.out.println("Average temperature in file is " + averageTemp);
+    }
+    
     public void testHumidityInManyFiles () {
         CSVRecord lowestHumidity = lowestHumidityInManyFiles();
         System.out.println("Lowest Humidity was " + lowestHumidity.get("Humidity") + 
