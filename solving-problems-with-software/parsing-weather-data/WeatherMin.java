@@ -45,7 +45,7 @@ public class WeatherMin {
                 double currentTemp = Double.parseDouble(coldestTempFile.get("TemperatureF"));
                 double lowestTemp = Double.parseDouble(currentColdest.get("TemperatureF"));
                 
-                if(currentTemp < lowestTemp) {
+                if((currentTemp > -9999) && (currentTemp < lowestTemp)) {
                     lowestTempFile = f;
                 }
             }
@@ -165,7 +165,7 @@ public class WeatherMin {
         FileResource fr = new FileResource();
         CSVRecord coldest = coldestHourInFile(fr.getCSVParser());
         System.out.println("The coldest temperature was " + coldest.get("TemperatureF") +
-                            " at " + coldest.get("TimeEST"));
+                            " at " + coldest.get("DateUTC"));
     }
     
     public void testFileWithColdestTemperature() throws IOException{
