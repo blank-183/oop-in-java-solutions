@@ -10,8 +10,25 @@ import org.apache.commons.csv.*;
 
 public class BabyBirths {
     
+    public void whatIsNameInYear(String name, int year, int newYear, String gender) {
+        int newRank = getRank(year, name, gender);
+        
+        if(newRank != -1) {
+            String newName = getName(newYear, newRank, gender);
+            
+            if(!newName.equals("NO NAME")) {
+                System.out.println(name + " born in " + year + " would be " + newName + 
+                                    " if she was born in " + newYear + ".");
+            }
+        }
+    }
+    
+    public void testNewName() {
+        whatIsNameInYear("Isabella", 2012, 2014, "F");
+    }
+    
     public int getRank(int year, String name, String gender) {
-        String fileName = "data/yob" + year + ".csv";
+        String fileName = "testing/yob" + year + "short.csv";
         FileResource fr = new FileResource(fileName);
         int rank = 0;
         boolean isNamePresent = false;
@@ -46,7 +63,6 @@ public class BabyBirths {
                 }
             }
         }
-        
         return "NO NAME";
     }
     
