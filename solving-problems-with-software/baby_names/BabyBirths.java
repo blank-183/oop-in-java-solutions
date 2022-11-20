@@ -11,6 +11,37 @@ import java.io.*;
 
 public class BabyBirths {
     
+    public int getTotalBirthsRankedHigher(int year, String name, String gender) {
+        String fileName = "testing/yob" + year + "short.csv";
+        FileResource fr = new FileResource(fileName);
+        int totalBirths = 0;
+        int rankMonitor = 1;
+        double currentRank = getRank(year, name, gender);
+        
+        if(currentRank == -1) {
+            return -1;
+        }
+        
+        for(CSVRecord record : fr.getCSVParser(false)) {
+            if(record.get(1).equals(gender)) {
+                if(rankMonitor < currentRank) {
+                    totalBirths += Integer.parseInt(record.get(2));
+                    rankMonitor += 1;
+                }
+                
+                if(rankMonitor == currentRank) {
+                    break;
+                }
+            }
+        }
+        
+        return totalBirths;
+    }
+    
+    public void testTotalBirthsRankedHigher() {
+        System.out.println("Total births: " + getTotalBirthsRankedHigher(2013, "Sophia", "F"));
+    }
+    
     public double getAverageRank(String name, String gender) {
         DirectoryResource dr = new DirectoryResource();
         double total = 0.0;
