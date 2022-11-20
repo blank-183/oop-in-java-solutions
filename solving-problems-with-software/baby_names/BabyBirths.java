@@ -11,6 +11,37 @@ import java.io.*;
 
 public class BabyBirths {
     
+    public double getAverageRank(String name, String gender) {
+        DirectoryResource dr = new DirectoryResource();
+        double total = 0.0;
+        int count = 0;
+        
+        for(File f : dr.selectedFiles()) {
+            FileResource fr = new FileResource(f);
+            double currentRank = getYearRank(fr, name, gender);
+            
+            if(total == 0.0 && currentRank != -1) {
+                total += currentRank;
+                count += 1;
+            } else {
+                if(getYearRank(fr, name, gender) != -1) {
+                    total += currentRank;
+                    count += 1;
+                }
+            }
+        }
+        
+        if(total == 0.0) {
+            return -1;
+        }
+        
+        return total / count;
+    }
+    
+    public void testAverage() {
+        System.out.println(getAverageRank("Jacob", "M"));
+    }
+    
     public void whatIsNameInYear(String name, int year, int newYear, String gender) {
         int newRank = getRank(year, name, gender);
         
@@ -41,18 +72,20 @@ public class BabyBirths {
         
         for(File f : dr.selectedFiles()) {
             FileResource fr = new FileResource(f);
-            if(highestRank == null && extractInt(f.getName()) != -1) {
-                highestRank = extractInt(f.getName());
-                int currentRank = getYearRank(fr, name, gender);
-                System.out.println("Ranks: " + currentRank + " year: " + extractInt(f.getName()));
-            } else {
-                int currentRank = getYearRank(fr, name, gender);
+            int currentYear = extractInt(f.getName());
+            int currentRank = getYearRank(fr, name, gender);
+            
+            if(highestRank == null && currentRank != -1) {
+                highestRank = currentYear;
+                System.out.println("Ranks: " + currentRank + " year: " + currentYear);
+            } else if(currentRank != -1) {
                 int currentHighestRank = getRank(highestRank, name, gender);
                 
                 if(currentRank != -1 && currentRank < currentHighestRank) {
-                    highestRank = extractInt(f.getName());
+                    highestRank = currentYear;
                 }
-                System.out.println("Ranks: " + currentRank + " year: " + extractInt(f.getName()));
+                
+                System.out.println("Ranks: " + currentRank + " year: " + currentYear);
             }
         }
         if(highestRank == null) {
