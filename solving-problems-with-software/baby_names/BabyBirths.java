@@ -7,6 +7,7 @@
  */
 import edu.duke.*;
 import org.apache.commons.csv.*;
+import java.io.*;
 
 public class BabyBirths {
     
@@ -21,6 +22,69 @@ public class BabyBirths {
                                     " if she was born in " + newYear + ".");
             }
         }
+    }
+    
+    public int extractInt(String str) {
+        str = str.replaceAll("[^0-9]", " "); // regular expression
+        str = str.replaceAll(" +", " ");
+        str = str.trim();
+        
+        if (str.equals(""))
+            return -1;
+ 
+        return Integer.parseInt(str);
+    }
+    
+    public int yearOfHighestRank(String name, String gender) {
+        DirectoryResource dr = new DirectoryResource();
+        Integer highestRank = null;
+        
+        for(File f : dr.selectedFiles()) {
+            FileResource fr = new FileResource(f);
+            if(highestRank == null && extractInt(f.getName()) != -1) {
+                highestRank = extractInt(f.getName());
+                int currentRank = getYearRank(fr, name, gender);
+                System.out.println("Ranks: " + currentRank + " year: " + extractInt(f.getName()));
+            } else {
+                int currentRank = getYearRank(fr, name, gender);
+                int currentHighestRank = getRank(highestRank, name, gender);
+                
+                if(currentRank != -1 && currentRank < currentHighestRank) {
+                    highestRank = extractInt(f.getName());
+                }
+                System.out.println("Ranks: " + currentRank + " year: " + extractInt(f.getName()));
+            }
+        }
+        if(highestRank == null) {
+            return -1;
+        }
+        
+        return highestRank;
+    }
+    
+    public void testYearHighestRank() {
+        System.out.println(yearOfHighestRank("Mason", "M"));
+    }
+    
+    public int getYearRank(FileResource fr, String name, String gender) {
+        int rank = 0;
+        boolean isNamePresent = false;
+        
+        for(CSVRecord record : fr.getCSVParser(false)) {
+            if(record.get(1).equals(gender)) {
+                rank += 1;
+                if(record.get(0).equals(name)) {
+                    isNamePresent = true;
+                    break;
+                }
+            }
+        }
+        
+        if(!isNamePresent) {
+            return -1;
+        }
+        
+        return rank;
     }
     
     public void testNewName() {
