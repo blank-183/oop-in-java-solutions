@@ -11,7 +11,7 @@ import org.apache.commons.csv.*;
 public class BabyBirths {
     
     public int getRank(int year, String name, String gender) {
-        String fileName = "testing/yob" + year + "short.csv";
+        String fileName = "data/yob" + year + ".csv";
         FileResource fr = new FileResource(fileName);
         int rank = 0;
         boolean isNamePresent = false;
@@ -31,6 +31,27 @@ public class BabyBirths {
         }
         
         return rank;
+    }
+    
+    public String getName(int year, int rank, String gender) {
+        String fileName = "testing/yob" + year + "short.csv";
+        FileResource fr = new FileResource(fileName);
+        int currRank = 0;
+        
+        for(CSVRecord record : fr.getCSVParser(false)) {
+            if(record.get(1).equals(gender)) {
+                currRank += 1;
+                if(currRank == rank) {
+                    return record.get(0);
+                }
+            }
+        }
+        
+        return "NO NAME";
+    }
+    
+    public void testGetName() {
+        System.out.println(getName(2014, 6, "F"));
     }
     
     public void testRank() {
