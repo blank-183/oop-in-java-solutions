@@ -12,7 +12,7 @@ import java.io.*;
 public class BabyBirths {
     
     public int getTotalBirthsRankedHigher(int year, String name, String gender) {
-        String fileName = "testing/yob" + year + "short.csv";
+        String fileName = "data/yob" + year + ".csv";
         FileResource fr = new FileResource(fileName);
         int totalBirths = 0;
         int rankMonitor = 1;
@@ -39,7 +39,7 @@ public class BabyBirths {
     }
     
     public void testTotalBirthsRankedHigher() {
-        System.out.println("Total births: " + getTotalBirthsRankedHigher(2013, "Sophia", "F"));
+        System.out.println("Total births: " + getTotalBirthsRankedHigher(1990, "Drew", "M"));
     }
     
     public double getAverageRank(String name, String gender) {
@@ -70,7 +70,7 @@ public class BabyBirths {
     }
     
     public void testAverage() {
-        System.out.println(getAverageRank("Jacob", "M"));
+        System.out.println(getAverageRank("Robert", "M"));
     }
     
     public void whatIsNameInYear(String name, int year, int newYear, String gender) {
@@ -127,7 +127,7 @@ public class BabyBirths {
     }
     
     public void testYearHighestRank() {
-        System.out.println(yearOfHighestRank("Mason", "M"));
+        System.out.println(yearOfHighestRank("Genevieve", "F"));
     }
     
     public int getYearRank(FileResource fr, String name, String gender) {
@@ -152,11 +152,11 @@ public class BabyBirths {
     }
     
     public void testNewName() {
-        whatIsNameInYear("Isabella", 2012, 2014, "F");
+        whatIsNameInYear("Owen", 1974, 2014, "M");
     }
     
     public int getRank(int year, String name, String gender) {
-        String fileName = "testing/yob" + year + "short.csv";
+        String fileName = "data/yob" + year + ".csv";
         FileResource fr = new FileResource(fileName);
         int rank = 0;
         boolean isNamePresent = false;
@@ -179,7 +179,7 @@ public class BabyBirths {
     }
     
     public String getName(int year, int rank, String gender) {
-        String fileName = "testing/yob" + year + "short.csv";
+        String fileName = "data/yob" + year + ".csv";
         FileResource fr = new FileResource(fileName);
         int currRank = 0;
         
@@ -199,17 +199,21 @@ public class BabyBirths {
     }
     
     public void testRank() {
-        System.out.println(getRank(2012, "Mason", "F"));
+        System.out.println(getRank(1971, "Frank", "M"));
     }
     
-    public void printNames () {
+    public void printNames (String gender) {
         FileResource fr = new FileResource();
+        int currRank = 1;
         for (CSVRecord rec : fr.getCSVParser(false)) {
-            int numBorn = Integer.parseInt(rec.get(2));
-            if (numBorn <= 100) {
-                System.out.println("Name " + rec.get(0) +
-                           " Gender " + rec.get(1) +
-                           " Num Born " + rec.get(2));
+            if(rec.get(1).equals(gender)) {
+                if(currRank > 300 && currRank < 460) {
+                    System.out.println("Rank: " + currRank + " Name " + rec.get(0) +
+                               " Gender " + rec.get(1) +
+                               " Num Born " + rec.get(2));
+                    
+                }
+                currRank += 1;
             }
         }
     }
@@ -218,24 +222,32 @@ public class BabyBirths {
         int totalBirths = 0;
         int totalBoys = 0;
         int totalGirls = 0;
+        int totalBoysNames = 0;
+        int totalGirlsNames = 0;
+        
         for (CSVRecord rec : fr.getCSVParser(false)) {
             int numBorn = Integer.parseInt(rec.get(2));
             totalBirths += numBorn;
             if (rec.get(1).equals("M")) {
                 totalBoys += numBorn;
+                totalBoysNames += 1;
             }
             else {
                 totalGirls += numBorn;
+                totalGirlsNames += 1;
             }
         }
         System.out.println("total births = " + totalBirths);
         System.out.println("female girls = " + totalGirls);
         System.out.println("male boys = " + totalBoys);
+        
+        System.out.println("Total boys names: " + totalBoysNames);
+        System.out.println("Total girls names: " + totalGirlsNames);
     }
 
     public void testTotalBirths () {
-        //FileResource fr = new FileResource();
-        FileResource fr = new FileResource("data/yob2014.csv");
+        FileResource fr = new FileResource();
+        //FileResource fr = new FileResource("data/yob1905.csv");
         totalBirths(fr);
     }
 }
