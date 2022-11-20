@@ -22,3 +22,9 @@ nc_weather
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+data
+testing
+us_babynames_by_decade
+us_babynames_by_year
+us_babynames_test
